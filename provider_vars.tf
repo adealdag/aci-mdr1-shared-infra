@@ -1,10 +1,10 @@
 variable "aci_url" {
-    description = "URL for CISCO APIC"
+  description = "URL for CISCO APIC"
 }
 
 variable "aci_username" {
   description = "This is the Cisco APIC username, which is required to authenticate with CISCO APIC"
-  default = "terraform"
+  default     = "terraform"
 }
 
 variable "aci_password" {
