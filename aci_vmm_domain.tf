@@ -33,6 +33,8 @@ resource "aci_access_port_selector" "esxi" {
   description               = "Port connecting to ${each.value.node_name}"
   name                      = "eth1_${each.value.port.port_id}"
   access_port_selector_type = "range"
+
+  relation_infra_rs_acc_base_grp = aci_leaf_access_bundle_policy_group.esxi[each.value.node_key].id
 }
 
 resource "aci_access_port_block" "port" {
@@ -44,6 +46,4 @@ resource "aci_access_port_block" "port" {
   from_port               = each.value.port.port_id
   to_card                 = "1"
   to_port                 = each.value.port.port_id
-
-  relation_infra_rs_acc_bndl_subgrp = aci_leaf_access_bundle_policy_group.esxi[each.value.node_key].id
 }
