@@ -27,7 +27,7 @@ resource "aci_leaf_access_bundle_policy_group" "esxi" {
 }
 
 resource "aci_access_port_selector" "esxi" {
-  for_each = { for p in local.esxi_ports : format("%s/%s", p.port.node_id, p.port.port_id) => p }
+  for_each = { for p in local.esxi_ports : format("%s_%s", p.port.node_id, p.port.port_id) => p }
 
   leaf_interface_profile_dn = aci_leaf_interface_profile.leaf_if_profile[each.value.port.node_id].id
   description               = "Port connecting to ${each.value.node_name}"
@@ -36,7 +36,7 @@ resource "aci_access_port_selector" "esxi" {
 }
 
 resource "aci_access_port_block" "port" {
-  for_each = { for p in local.esxi_ports : format("%s/%s", p.port.node_id, p.port.port_id) => p }
+  for_each = { for p in local.esxi_ports : format("%s_%s", p.port.node_id, p.port.port_id) => p }
 
   access_port_selector_dn = aci_access_port_selector.esxi[each.key].id
   name                    = "eth1/${each.value.port.port_id}"
