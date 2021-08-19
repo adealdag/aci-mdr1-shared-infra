@@ -17,5 +17,5 @@ resource "aci_leaf_profile" "leaf_profile" {
       to_   = each.key
     }
   }
-  relation_infra_rs_acc_card_p = [aci_leaf_interface_profile.leaf_if_profile[each.key].id]
+  relation_infra_rs_acc_card_p = [aci_leaf_interface_profile.leaf_if_profile[each.key].name]
 }
