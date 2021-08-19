@@ -39,7 +39,7 @@ resource "aci_access_port_block" "port" {
   for_each = { for p in local.esxi_ports : format("%s_%s", p.port.node_id, p.port.port_id) => p }
 
   access_port_selector_dn = aci_access_port_selector.esxi[each.key].id
-  name                    = "eth1/${each.value.port.port_id}"
+  name                    = "eth1_${each.value.port.port_id}"
   from_card               = "1"
   from_port               = each.value.port.port_id
   to_card                 = "1"
