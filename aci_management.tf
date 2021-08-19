@@ -16,6 +16,8 @@ resource "aci_static_node_mgmt_address" "oob_ip_addr" {
   gw                = var.fabric_management_oob.gateway_ip
 }
 
+# In-Band Management
+
 resource "aci_node_mgmt_epg" "inb_mgmt_epg" {
   type                  = "in_band"
   management_profile_dn = "uni/tn-mgmt/mgmtp-default"

@@ -38,19 +38,19 @@ fabric_nodes = {
 }
 
 fabric_management_oob = {
-  epg_name = "oob_mgmt_epg"
+  epg_name   = "oob_mgmt_epg"
   gateway_ip = "10.50.3.1"
 }
 
 fabric_management_inb = {
-  epg_name = "inb_mgmt_epg"
+  epg_name   = "inb_mgmt_epg"
   gateway_ip = "172.16.101.1"
   vlan_encap = "vlan-101"
 }
 
 vpc_domain = {
   1 = {
-    left_node_id = 1101
+    left_node_id  = 1101
     right_node_id = 1102
   }
 }
