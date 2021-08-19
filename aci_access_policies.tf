@@ -90,17 +90,17 @@ resource "aci_spanning_tree_interface_policy" "default" {
 }
 
 resource "aci_spanning_tree_interface_policy" "filter" {
-  name = "stp_default"
+  name = "stp_filter"
   ctrl = ["bpdu-filter"]
 }
 
 resource "aci_spanning_tree_interface_policy" "guard" {
-  name = "stp_default"
+  name = "stp_guard"
   ctrl = ["bpdu-guard"]
 }
 
 resource "aci_spanning_tree_interface_policy" "filter_guard" {
-  name = "stp_default"
+  name = "stp_filter_guard"
   ctrl = ["bpdu-filter", "bpdu-guard"]
 }
 
