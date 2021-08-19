@@ -24,14 +24,15 @@ resource "aci_leaf_profile" "leaf_profile" {
 
 # VPC Domains
 
-resource "aci_vpc_explicit_protection_group" "vpc_domain" {
-  for_each = var.vpc_domain
+# Removed because it was done with the initial wizard
+# resource "aci_vpc_explicit_protection_group" "vpc_domain" {
+#   for_each = var.vpc_domain
 
-  name                             = "vpc_${each.key}"
-  switch1                          = each.value.left_node_id
-  switch2                          = each.value.right_node_id
-  vpc_explicit_protection_group_id = each.key
-}
+#   name                             = "vpc_${each.key}"
+#   switch1                          = each.value.left_node_id
+#   switch2                          = each.value.right_node_id
+#   vpc_explicit_protection_group_id = each.key
+# }
 
 # Standard Interface Policies
 
