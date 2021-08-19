@@ -31,7 +31,7 @@ resource "aci_access_port_selector" "esxi" {
 
   leaf_interface_profile_dn = aci_leaf_interface_profile.leaf_if_profile[each.value.port.node_id].id
   description               = "Port connecting to ${each.value.node_name}"
-  name                      = "eth1/${each.value.port.port_id}"
+  name                      = "eth1_${each.value.port.port_id}"
   access_port_selector_type = "range"
 }
 
