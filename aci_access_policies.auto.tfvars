@@ -47,3 +47,10 @@ fabric_management_inb = {
   gateway_ip = "172.16.101.1"
   vlan_encap = "vlan-101"
 }
+
+vpc_domain = {
+  1 = {
+    left_node_id = 1101
+    right_node_id = 1102
+  }
+}
