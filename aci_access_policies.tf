@@ -103,3 +103,27 @@ resource "aci_spanning_tree_interface_policy" "filter_guard" {
   name = "stp_default"
   ctrl = ["bpdu-filter", "bpdu-guard"]
 }
+
+resource "aci_lacp_policy" "active" {
+  name      = "lacp_active"
+  ctrl      = ["susp-individual", "load-defer", "graceful-conv"]
+  max_links = "16"
+  min_links = "1"
+  mode      = "active"
+}
+
+resource "aci_lacp_policy" "passive" {
+  name      = "lacp_passive"
+  ctrl      = ["susp-individual", "load-defer", "graceful-conv"]
+  max_links = "16"
+  min_links = "1"
+  mode      = "passive"
+}
+
+resource "aci_lacp_policy" "macpin" {
+  name      = "lacp_macpin"
+  max_links = "16"
+  min_links = "1"
+  mode      = "mac-pin"
+}
+
