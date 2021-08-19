@@ -44,4 +44,6 @@ resource "aci_access_port_block" "port" {
   from_port               = each.value.port.port_id
   to_card                 = "1"
   to_port                 = each.value.port.port_id
+
+  relation_infra_rs_acc_bndl_subgrp = aci_leaf_access_bundle_policy_group.esxi[each.p.node_key]
 }
