@@ -95,11 +95,7 @@ resource "null_resource" "attach_esxi_dvs" {
     module.vmm_domain_vmware["mdr1"]
   ]
   provisioner "local-exec" {
-    command = <<EOT
-      pip install ansible
-      pip install pyvmomi
-      ansible-playbook -i inventory.yaml attach_hosts_vds.yaml
-    EOT
+    command = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
     working_dir = "ansible"
     interpreter = [
       "/bin/bash", "-c"
