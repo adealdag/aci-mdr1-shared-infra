@@ -80,7 +80,7 @@ module "vmm_domain_vmware" {
   for_each = var.vmm_domain
 
   name = each.value.name
-  vc_host_or_ip = "vcsa-mdr1.cisco.com"
+  vc_host_or_ip = "10.50.3.240"
   vc_username = var.vcenter_username
   vc_password = var.vcenter_password
   vc_datacenter = "MDR1"
