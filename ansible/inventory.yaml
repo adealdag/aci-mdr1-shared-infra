@@ -1,0 +1,12 @@
+mdr1lab:
+  children:
+    apic:
+      hosts: 
+        apic1:
+          ansible_host: "apic1-mdr1.cisco.com"
+          aci_validate_certs: no
+    vsphere:
+      hosts:
+        vcsa:
+          ansible_hosts: "vcsa-mdr1.cisco.com"
+          validate_certs: no

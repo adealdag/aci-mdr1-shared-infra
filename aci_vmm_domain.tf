@@ -89,3 +89,21 @@ module "vmm_domain_vmware" {
   management_epg_dn = aci_node_mgmt_epg.oob_mgmt_epg.id
   vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.key].id
 }
+
+resource "null_resource" "attach_esxi_dvs" {
+  depends_on = [
+    module.vmm_domain_vmware["mdr1"]
+  ]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
+    working_dir = "ansible"
+    interpreter = [
+      "/bin/bash", "-c"
+    ]
+    environment = {
+      VMWARE_HOST = "vcsa-mdr1.cisco.com"
+      VMWARE_USER = var.vcenter_username
+      VMWARE_PASSWORD = var.vcenter_password
+     }
+  }
+}

@@ -1,0 +1,27 @@
+# vSphere playbook that attaches a list of hosts to a VDS
+---
+
+- name: Attach ESXi hosts to VDS
+  hosts: vcsa
+  connection: local
+  gather_facts: no
+
+  vars:
+    vds_folder: "vmm_vds"
+    vds_name: "vmm_vds"
+
+
+  tasks:
+    - name: Add Host to VDS
+      community.vmware.vmware_dvs_host:
+        validate_certs: '{{ validate_certs }}'
+        esxi_hostname: '{{ item.name }}'
+        switch_name: "{{ vds_name }}"
+        vmnics:
+            - vmnic0
+            - vmnic1
+        state: present
+      loop:
+        - { name: hx-edge-c1-1-mdr1.cisco.com }
+        - { name: hx-edge-c1-2-mdr1.cisco.com }
+        - { name: hx-edge-c1-3-mdr1.cisco.com }
