@@ -10,3 +10,11 @@ variable "aci_username" {
 variable "aci_password" {
   description = "Password of the user mentioned in username argument. It is required when you want to use token-based authentication."
 }
+
+variable "vcenter_username" {
+  description = "vCenter username"
+}
+
+variable "vcenter_password" {
+  description = "vCenter password"
+}

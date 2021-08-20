@@ -7,7 +7,17 @@ variable "esxi_nodes" {
       node_id = string
       port_id = string
     }))
-
   }))
+}
 
+variable "vmm_domain" {
+  description = "Attributes to configure VMM domain integration with VMware"
+  default     = {}
+  type = map(object({
+    name = string
+    vlans = list(object({
+      range_from = string
+      range_to   = string
+    }))
+  }))
 }

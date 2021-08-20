@@ -7,6 +7,16 @@ locals {
         node_name = node_attrs.name
         port      = port
   }]])
+  
+  vlan_ranges = flatten([
+    for vmm_key, vmm_value in var.vmm_domain : [
+      for range in vmm_value.vlans : {
+        vmm_key = vmm_key
+        from    = range.range_from
+        to      = range.range_to
+      }
+    ]
+  ])
 }
 
 # Access policies to connect HX nodes
@@ -46,4 +56,36 @@ resource "aci_access_port_block" "port" {
   from_port               = each.value.port.port_id
   to_card                 = "1"
   to_port                 = each.value.port.port_id
+}
+
+resource "aci_vlan_pool" "vmm_vmware" {
+  for_each = var.vmm_domain
+
+  name       = "${each.value.name}_vlan"
+  alloc_mode = "dynamic"
+}
+
+resource "aci_ranges" "vlan_block" {
+  for_each = { for r in local.vlan_ranges : format("%s_%s_%s", r.vmm_key, r.from, r.to) => r }
+
+  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.value.vmm_key]
+  from         = each.value.from
+  to           = each.value.to
+  alloc_mode   = "dynamic"
+  role         = "external"
+}
+
+module "vmm_domain_vmware" {
+  source = "./module_aci_vmm_domain"
+  for_each = var.vmm_domain
+
+  name = each.value.name
+  vc_host_or_ip = "vcsa-mdr1.cisco.com"
+  vc_username = var.vcenter_username
+  vc_password = var.vcenter_password
+  vc_datacenter = "MDR1"
+  dvs_version = "6.5"
+  stats_collection = "enabled"
+  management_epg_dn = aci_node_mgmt_epg.oob_mgmt_epg.id
+  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.key]
 }

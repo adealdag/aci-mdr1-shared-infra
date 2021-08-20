@@ -39,3 +39,13 @@ esxi_nodes = {
     }]
   }
 }
+
+vmm_domain = {
+  "mdr1" = {
+    name = "vmm_vds"
+    vlans = [ {
+      range_from = "3000"
+      range_to = "3999"
+    } ]
+  }
+}
