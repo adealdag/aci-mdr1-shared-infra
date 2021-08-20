@@ -16,8 +16,8 @@ variable "vmm_domain" {
   type = map(object({
     name = string
     vlans = list(object({
-      range_from = string
-      range_to   = string
+      encap_from = string
+      encap_to   = string
     }))
   }))
 }

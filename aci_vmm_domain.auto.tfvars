@@ -44,8 +44,8 @@ vmm_domain = {
   "mdr1" = {
     name = "vmm_vds"
     vlans = [ {
-      range_from = "3000"
-      range_to = "3999"
+      encap_from = "vlan-3000"
+      encap_to = "vlan-3999"
     } ]
   }
 }

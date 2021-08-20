@@ -12,8 +12,8 @@ locals {
     for vmm_key, vmm_value in var.vmm_domain : [
       for range in vmm_value.vlans : {
         vmm_key = vmm_key
-        from    = range.range_from
-        to      = range.range_to
+        from    = range.encap_from
+        to      = range.encap_to
       }
     ]
   ])
