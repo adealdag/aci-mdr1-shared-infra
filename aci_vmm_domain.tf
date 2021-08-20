@@ -7,7 +7,7 @@ locals {
         node_name = node_attrs.name
         port      = port
   }]])
-  
+
   vlan_ranges = flatten([
     for vmm_key, vmm_value in var.vmm_domain : [
       for range in vmm_value.vlans : {
@@ -68,7 +68,7 @@ resource "aci_vlan_pool" "vmm_vmware" {
 resource "aci_ranges" "vlan_block" {
   for_each = { for r in local.vlan_ranges : format("%s_%s_%s", r.vmm_key, r.from, r.to) => r }
 
-  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.value.vmm_key]
+  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.value.vmm_key].id
   from         = each.value.from
   to           = each.value.to
   alloc_mode   = "dynamic"
@@ -87,5 +87,5 @@ module "vmm_domain_vmware" {
   dvs_version = "6.5"
   stats_collection = "enabled"
   management_epg_dn = aci_node_mgmt_epg.oob_mgmt_epg.id
-  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.key]
+  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.key].id
 }
