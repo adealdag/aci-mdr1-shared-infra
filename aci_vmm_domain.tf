@@ -101,11 +101,6 @@ resource "null_resource" "attach_esxi_dvs" {
     interpreter = [
       "/bin/bash", "-c"
     ]
-    environment = {
-      VMWARE_HOST = "vcsa-mdr1.cisco.com"
-      VMWARE_USER = var.vcenter_username
-      VMWARE_PASSWORD = var.vcenter_password
-     }
   }
 
   provisioner "local-exec" {
