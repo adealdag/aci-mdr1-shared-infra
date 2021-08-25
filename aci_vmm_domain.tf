@@ -96,8 +96,8 @@ resource "null_resource" "attach_esxi_dvs" {
   ]
   provisioner "local-exec" {
     command = <<EOT
-    ansible galaxy collection install community.vmware
-    ansible-playbook -i inventory.yaml attach_hosts_vds.yaml
+    "ansible galaxy collection install community.vmware"
+    "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
     EOT
     working_dir = "ansible"
     interpreter = [
