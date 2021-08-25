@@ -95,7 +95,10 @@ resource "null_resource" "attach_esxi_dvs" {
     module.vmm_domain_vmware["mdr1"]
   ]
   provisioner "local-exec" {
-    command = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
+    command = <<EOT
+    ansible galaxy collection install community.vmware
+    ansible-playbook -i inventory.yaml attach_hosts_vds.yaml
+    EOT
     working_dir = "ansible"
     interpreter = [
       "/bin/bash", "-c"
