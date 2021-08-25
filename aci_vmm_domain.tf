@@ -20,6 +20,11 @@ locals {
 }
 
 # Access policies to connect HX nodes
+resource "aci_attachable_access_entity_profile" "esxi_aaep" {
+  name        = "esxi_aaep"
+  relation_infra_rs_dom_p = [module.vmm_domain_vmware.id]
+}
+
 resource "aci_leaf_access_bundle_policy_group" "esxi" {
   for_each = var.esxi_nodes
 
@@ -33,7 +38,7 @@ resource "aci_leaf_access_bundle_policy_group" "esxi" {
   relation_infra_rs_mcp_if_pol  = aci_miscabling_protocol_interface_policy.on.id
   relation_infra_rs_stp_if_pol  = aci_spanning_tree_interface_policy.filter_guard.id
 
-  # relation_infra_rs_att_ent_p = ""
+  relation_infra_rs_att_ent_p = aci_attachable_access_entity_profile.esxi_aaep.id
 }
 
 resource "aci_access_port_selector" "esxi" {
