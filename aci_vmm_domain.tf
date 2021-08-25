@@ -94,11 +94,22 @@ resource "null_resource" "attach_esxi_dvs" {
   depends_on = [
     module.vmm_domain_vmware["mdr1"]
   ]
+
   provisioner "local-exec" {
-    command = <<EOT
-    "ansible-galaxy collection install community.vmware"
-    "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
-    EOT
+    command = "ansible-galaxy collection install community.vmware"
+    working_dir = "ansible"
+    interpreter = [
+      "/bin/bash", "-c"
+    ]
+    environment = {
+      VMWARE_HOST = "vcsa-mdr1.cisco.com"
+      VMWARE_USER = var.vcenter_username
+      VMWARE_PASSWORD = var.vcenter_password
+     }
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
     working_dir = "ansible"
     interpreter = [
       "/bin/bash", "-c"
