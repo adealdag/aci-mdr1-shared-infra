@@ -43,9 +43,9 @@ esxi_nodes = {
 vmm_domain = {
   "mdr1" = {
     name = "vmm_vds"
-    vlans = [ {
+    vlans = [{
       encap_from = "vlan-3915"
-      encap_to = "vlan-3999"
-    } ]
+      encap_to   = "vlan-3999"
+    }]
   }
 }

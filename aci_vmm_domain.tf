@@ -21,7 +21,7 @@ locals {
 
 # Access policies to connect HX nodes
 resource "aci_attachable_access_entity_profile" "esxi_aaep" {
-  name        = "esxi_aaep"
+  name                    = "esxi_aaep"
   relation_infra_rs_dom_p = [module.vmm_domain_vmware["mdr1"].id]
 }
 
@@ -81,18 +81,18 @@ resource "aci_ranges" "vlan_block" {
 }
 
 module "vmm_domain_vmware" {
-  source = "./module_aci_vmm_domain"
+  source   = "./module_aci_vmm_domain"
   for_each = var.vmm_domain
 
-  name = each.value.name
-  vc_host_or_ip = "10.50.3.240"
-  vc_username = var.vcenter_username
-  vc_password = var.vcenter_password
-  vc_datacenter = "MDR1"
-  dvs_version = "6.5"
-  stats_collection = "enabled"
+  name              = each.value.name
+  vc_host_or_ip     = "10.50.3.240"
+  vc_username       = var.vcenter_username
+  vc_password       = var.vcenter_password
+  vc_datacenter     = "MDR1"
+  dvs_version       = "6.5"
+  stats_collection  = "enabled"
   management_epg_dn = aci_node_mgmt_epg.oob_mgmt_epg.id
-  vlan_pool_dn = aci_vlan_pool.vmm_vmware[each.key].id
+  vlan_pool_dn      = aci_vlan_pool.vmm_vmware[each.key].id
 }
 
 resource "null_resource" "attach_esxi_dvs" {
@@ -101,7 +101,7 @@ resource "null_resource" "attach_esxi_dvs" {
   ]
 
   provisioner "local-exec" {
-    command = "ansible-galaxy collection install community.vmware"
+    command     = "ansible-galaxy collection install community.vmware"
     working_dir = "ansible"
     interpreter = [
       "/bin/bash", "-c"
@@ -109,15 +109,15 @@ resource "null_resource" "attach_esxi_dvs" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
+    command     = "ansible-playbook -i inventory.yaml attach_hosts_vds.yaml"
     working_dir = "ansible"
     interpreter = [
       "/bin/bash", "-c"
     ]
     environment = {
-      VMWARE_HOST = "vcsa-mdr1.cisco.com"
-      VMWARE_USER = var.vcenter_username
+      VMWARE_HOST     = "vcsa-mdr1.cisco.com"
+      VMWARE_USER     = var.vcenter_username
       VMWARE_PASSWORD = var.vcenter_password
-     }
+    }
   }
 }
