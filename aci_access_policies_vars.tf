@@ -25,6 +25,7 @@ variable "fabric_management_inb" {
   type = object({
     epg_name   = string
     gateway_ip = string
+    gateway_mask_len = string
     vlan_encap = string
   })
 }
