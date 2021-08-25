@@ -18,8 +18,8 @@
         esxi_hostname: '{{ item.name }}'
         switch_name: "{{ vds_name }}"
         vmnics:
-            - vmnic0
-            - vmnic1
+            - vmnic10
+            - vmnic11
         state: present
       loop:
         - { name: hx-edge-c1-1-mdr1.cisco.com }
