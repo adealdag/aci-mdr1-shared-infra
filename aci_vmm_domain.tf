@@ -22,7 +22,7 @@ locals {
 # Access policies to connect HX nodes
 resource "aci_attachable_access_entity_profile" "esxi_aaep" {
   name        = "esxi_aaep"
-  relation_infra_rs_dom_p = [module.vmm_domain_vmware.id]
+  relation_infra_rs_dom_p = [module.vmm_domain_vmware["mdr1"].id]
 }
 
 resource "aci_leaf_access_bundle_policy_group" "esxi" {
