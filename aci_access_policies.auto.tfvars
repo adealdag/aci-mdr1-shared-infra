@@ -45,6 +45,7 @@ fabric_management_oob = {
 fabric_management_inb = {
   epg_name   = "inb_mgmt_epg"
   gateway_ip = "172.16.101.1"
+  gateway_mask_len = "24"
   vlan_encap = "vlan-101"
 }
 
