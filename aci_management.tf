@@ -1,4 +1,4 @@
-# Data Soources
+# Data Sources
 data "aci_tenant" "mgmt" {
   name = "mgmt"
 }
