@@ -19,5 +19,8 @@ variable "vmm_domain" {
       encap_from = string
       encap_to   = string
     }))
+    vc_host_or_ip = string
+    vc_datacenter = string
+    dvs_version = string
   }))
 }

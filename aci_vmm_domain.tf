@@ -81,15 +81,15 @@ resource "aci_ranges" "vlan_block" {
 }
 
 module "vmm_domain_vmware" {
-  source   = "./module_aci_vmm_domain"
+  source   = "github.com/adealdag/terraform-aci-vmm-vmware"
   for_each = var.vmm_domain
 
   name              = each.value.name
-  vc_host_or_ip     = "10.50.3.240"
+  vc_host_or_ip     = each.value.vc_host_or_ip
   vc_username       = var.vcenter_username
   vc_password       = var.vcenter_password
-  vc_datacenter     = "MDR1"
-  dvs_version       = "6.5"
+  vc_datacenter     = each.value.vc_datacenter
+  dvs_version       = each.value.dvs_version
   stats_collection  = "enabled"
   management_epg_dn = aci_node_mgmt_epg.oob_mgmt_epg.id
   vlan_pool_dn      = aci_vlan_pool.vmm_vmware[each.key].id
