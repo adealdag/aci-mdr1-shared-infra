@@ -47,5 +47,8 @@ vmm_domain = {
       encap_from = "vlan-3915"
       encap_to   = "vlan-3999"
     }]
+    vc_host_or_ip = "10.50.3.240"
+    vc_datacenter = "MDR1"
+    dvs_version   = "6.5"
   }
 }
