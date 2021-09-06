@@ -21,6 +21,6 @@ variable "vmm_domain" {
     }))
     vc_host_or_ip = string
     vc_datacenter = string
-    dvs_version = string
+    dvs_version   = string
   }))
 }

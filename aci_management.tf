@@ -27,9 +27,9 @@ resource "aci_bridge_domain" "inb" {
 }
 
 resource "aci_subnet" "inb" {
-  parent_dn   = aci_bridge_domain.inb.id
-  ip          = "${var.fabric_management_inb.gateway_ip}/${var.fabric_management_inb.gateway_mask_len}"
-  scope       = ["public"]
+  parent_dn = aci_bridge_domain.inb.id
+  ip        = "${var.fabric_management_inb.gateway_ip}/${var.fabric_management_inb.gateway_mask_len}"
+  scope     = ["public"]
 }
 
 resource "aci_node_mgmt_epg" "inb_mgmt_epg" {

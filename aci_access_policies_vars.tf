@@ -23,10 +23,10 @@ variable "fabric_management_oob" {
 variable "fabric_management_inb" {
   description = "Parameters for the inb management configuration of the fabric."
   type = object({
-    epg_name   = string
-    gateway_ip = string
+    epg_name         = string
+    gateway_ip       = string
     gateway_mask_len = string
-    vlan_encap = string
+    vlan_encap       = string
   })
 }
 
@@ -38,4 +38,3 @@ variable "vpc_domain" {
     right_node_id = string
   }))
 }
-
