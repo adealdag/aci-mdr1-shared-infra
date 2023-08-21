@@ -12,7 +12,7 @@ resource "aci_attachable_access_entity_profile" "main_aaep" {
 }
 
 resource "aci_leaf_access_port_policy_group" "core" {
-  name  = "access_core"
+  name = "access_core"
 
   relation_infra_rs_cdp_if_pol  = aci_cdp_interface_policy.off.id
   relation_infra_rs_lldp_if_pol = aci_lldp_interface_policy.on.id
